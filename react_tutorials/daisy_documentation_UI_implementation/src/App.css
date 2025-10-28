@@ -1,16 +1,16 @@
 /**
  * Main application styles
- * Imports Tailwind CSS v4 and DaisyUI plugin
+ * Imports Tailwind CSS v4, DaisyUI plugin, and global styles
  */
 @import "tailwindcss";
 @plugin "daisyui";
 
-/* Custom styles */
-.app-container {
+/* Import global styles */
+@import "./styles/globals.css";
+
+/* Root layout */
+#root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
 }
