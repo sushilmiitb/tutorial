@@ -24,6 +24,20 @@ export const AVAILABLE_THEMES = [
   'black',
   'luxury',
   'dracula',
+  'cmyk',
+  'autumn',
+  'business',
+  'acid',
+  'lemonade',
+  'night',
+  'coffee',
+  'winter',
+  'dim',
+  'nord',
+  'sunset',
+  'caramellatte',
+  'abyss',
+  'silk',
 ] as const
 
 export const HTTP_STATUS = {
