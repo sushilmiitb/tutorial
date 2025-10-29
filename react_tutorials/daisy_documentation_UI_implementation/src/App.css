@@ -5,6 +5,11 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+/* Extend Tailwind theme with custom text size */
+@theme {
+  --text-xs: 0.625rem;
+}
+
 /* Import global styles */
 @import "./styles/globals.css";
 

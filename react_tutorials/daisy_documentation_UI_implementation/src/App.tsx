@@ -1,18 +1,18 @@
 /**
  * Main App component
- * Root component that provides layout structure with drawer sidebar
+ * Documentation-style layout with drawer sidebar
  */
 
 import { useState } from 'react'
-import { Header, Footer, Sidebar } from '@/components/layout'
-import { HomePage, AboutPage, DashboardPage, NotFoundPage } from '@/pages'
+import { Header, Footer, Sidebar, RightSidebar } from '@/components/layout'
+import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage } from '@/pages'
 import './App.css'
 
-type Page = 'home' | 'about' | 'dashboard' | '404'
+type Page = 'home' | 'about' | 'dashboard' | 'components' | '404'
 
 function App() {
   // Simple client-side routing state
-  const [currentPage, setCurrentPage] = useState<Page>('home')
+  const [currentPage, setCurrentPage] = useState<Page>('components')
 
   // Listen for custom navigation events
   useState(() => {
@@ -38,6 +38,7 @@ function App() {
         if (path === '/') setCurrentPage('home')
         else if (path === '/about') setCurrentPage('about')
         else if (path === '/dashboard') setCurrentPage('dashboard')
+        else if (path.startsWith('/components')) setCurrentPage('components')
         else setCurrentPage('404')
         
         window.history.pushState({}, '', path)
@@ -57,24 +58,38 @@ function App() {
         return <AboutPage />
       case 'dashboard':
         return <DashboardPage />
+      case 'components':
+        return <ComponentPage />
       case '404':
         return <NotFoundPage />
       default:
-        return <HomePage />
+        return <ComponentPage />
     }
   }
 
   return (
     <div className="drawer lg:drawer-open">
       <input id="main-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col">
-        {/* Page content */}
+      <div className="drawer-content">
+        {/* Header */}
         <Header />
-        <main className="flex-1">
-          {renderPage()}
-        </main>
+        
+        {/* Main Layout with Right Sidebar */}
+        <div className="flex flex-1">
+          {/* Main Content */}
+          <main className="flex-1 min-w-0">
+            {renderPage()}
+          </main>
+          
+          {/* Right Sidebar */}
+          <RightSidebar />
+        </div>
+        
+        {/* Footer */}
         <Footer />
       </div>
+      
+      {/* Left Drawer Sidebar */}
       <div className="drawer-side">
         <label htmlFor="main-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <Sidebar />
