@@ -3,7 +3,17 @@
  * Imports Tailwind CSS v4, DaisyUI plugin, and global styles
  */
 @import "tailwindcss";
-@plugin "daisyui";
+
+
+@plugin "daisyui"{
+  themes: light --default, dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  --color-base-200: oklch(29% 0.016 252.42);
+  --color-base-300: oklch(33% 0.016 252.42);
+}
 
 /* Extend Tailwind theme with custom text size */
 @theme {

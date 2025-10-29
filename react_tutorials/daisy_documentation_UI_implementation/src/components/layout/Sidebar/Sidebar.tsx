@@ -175,7 +175,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="min-h-full w-80 bg-base-100 border-r border-base-300">
+    <aside className="min-h-full w-80 bg-base-100">
       {/* Logo Section - shows when drawer is open (desktop) */}
       <div className="navbar border-b border-base-300 sticky top-0 z-50 backdrop-blur bg-base-100/95">
         <Logo />
