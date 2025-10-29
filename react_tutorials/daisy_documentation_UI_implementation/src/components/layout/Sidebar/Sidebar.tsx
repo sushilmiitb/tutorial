@@ -4,7 +4,7 @@
  * Logo appears at top when drawer is open (desktop)
  */
 
-import { useState } from 'react'
+import { useState, cloneElement, isValidElement } from 'react'
 import { sidebarNavigation, type NavItem } from '@/data/navigation'
 import { Logo } from '@/components/ui'
 
@@ -57,11 +57,28 @@ export function Sidebar() {
   }
 
   /**
+   * Render icon - applies styling based on selection state
+   */
+  const renderIcon = (icon: React.ReactNode | undefined, isSelected: boolean) => {
+    if (!icon) return null
+
+    // If it's a React element (Heroicon), clone it with appropriate styling
+    if (isValidElement(icon)) {
+      return cloneElement(icon, {
+        className: `w-5 h-5 ${isSelected ? 'text-content' : ''}`,
+      } as React.HTMLAttributes<SVGElement>)
+    }
+
+    // Otherwise, render as-is (for emoji or other content)
+    return <span>{icon}</span>
+  }
+
+  /**
    * Render common content (icon, title, tag) for navigation items
    */
-  const renderItemContent = (item: NavItem, isClickable: boolean) => (
+  const renderItemContent = (item: NavItem, isClickable: boolean, isSelected: boolean) => (
     <>
-      {item.icon && <span>{item.icon}</span>}
+      {renderIcon(item.icon, isSelected)}
       <span className="flex-1 text-left">{item.title}</span>
       {item.tag && (
         <span className={getTagClass(item.tag, isClickable)}>
@@ -79,7 +96,7 @@ export function Sidebar() {
     const isExpanded = expandedSections.includes(item.title)
     const hasChildren = item.children && item.children.length > 0
     const isClickable = !!item.path
-    const isActive = item.path && activeItem === item.path
+    const isActive = !!(item.path && activeItem === item.path)
     const indentClass = getIndentClass(level)
     const showVerticalLine = hasChildren && (level === 1 || level === 2)
     const shouldRenderChildren = hasChildren && (level !== 1 || isExpanded)
@@ -115,7 +132,7 @@ export function Sidebar() {
                 : getTextColorClass(level, true)
             }`}
           >
-            {renderItemContent(item, true)}
+            {renderItemContent(item, true, isActive)}
           </a>
         ) : (
           <button
@@ -124,7 +141,7 @@ export function Sidebar() {
               hasChildren && level === 1 ? 'cursor-pointer' : 'cursor-default'
             }`}
           >
-            {renderItemContent(item, false)}
+            {renderItemContent(item, false, isExpanded)}
             {hasChildren && level === 1 && (
               <svg
                 className={`w-4 h-4 ml-auto transition-transform ${

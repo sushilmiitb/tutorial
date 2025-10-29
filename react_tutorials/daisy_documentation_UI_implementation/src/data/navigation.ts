@@ -3,10 +3,32 @@
  * Generic recursive structure supporting up to 3 levels
  */
 
+import { ReactNode, createElement } from 'react'
+import {
+  BookOpenIcon,
+  Cog6ToothIcon,
+  BoltIcon,
+  ChartBarIcon,
+  MapIcon,
+  ChatBubbleLeftRightIcon,
+  PencilIcon,
+  Squares2X2Icon,
+  ComputerDesktopIcon,
+  PaintBrushIcon,
+  ShoppingCartIcon,
+  DocumentTextIcon,
+  AcademicCapIcon,
+  CommandLineIcon,
+  CodeBracketIcon,
+  HeartIcon,
+  UserIcon,
+  CpuChipIcon,
+} from '@heroicons/react/24/outline'
+
 export interface NavItem {
   title: string
   path?: string // Optional - if not provided, renders as non-clickable heading
-  icon?: string
+  icon?: ReactNode // Heroicon component or emoji
   tag?: 'new' | 'updated'
   defaultExpanded?: boolean // Only meaningful for level 1
   children?: NavItem[] // Recursive children (can go 3 levels deep)
@@ -15,7 +37,7 @@ export interface NavItem {
 export const sidebarNavigation: NavItem[] = [
   {
     title: 'Docs',
-    icon: '📖',
+    icon: createElement(BookOpenIcon),
     defaultExpanded: true,
     children: [
       { title: 'Introduction', path: '/docs/introduction' },
@@ -35,12 +57,12 @@ export const sidebarNavigation: NavItem[] = [
   },
   {
     title: 'Components',
-    icon: '⚙️',
+    icon: createElement(Cog6ToothIcon),
     defaultExpanded: true,
     children: [
       {
         title: 'Actions',
-        icon: '⚡️',
+        icon: createElement(BoltIcon),
         children: [
           { title: 'Button', path: '/components/button' },
           { title: 'Dropdown', path: '/components/dropdown' },
@@ -52,7 +74,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Data display',
-        icon: '📊',
+        icon: createElement(ChartBarIcon),
         children: [
           { title: 'Accordion', path: '/components/accordion' },
           { title: 'Avatar', path: '/components/avatar' },
@@ -74,7 +96,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Navigation',
-        icon: '🧭',
+        icon: createElement(MapIcon),
         children: [
           { title: 'Breadcrumbs', path: '/components/breadcrumbs' },
           { title: 'Dock', path: '/components/dock' },
@@ -88,7 +110,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Feedback',
-        icon: '💬',
+        icon: createElement(ChatBubbleLeftRightIcon),
         children: [
           { title: 'Alert', path: '/components/alert' },
           { title: 'Loading', path: '/components/loading' },
@@ -101,7 +123,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Data input',
-        icon: '✍️',
+        icon: createElement(PencilIcon),
         children: [
           { title: 'Calendar', path: '/components/calendar' },
           { title: 'Checkbox', path: '/components/checkbox' },
@@ -121,7 +143,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Layout',
-        icon: '📐',
+        icon: createElement(Squares2X2Icon),
         children: [
           { title: 'Divider', path: '/components/divider' },
           { title: 'Drawer sidebar', path: '/components/drawer', tag: 'updated' },
@@ -135,7 +157,7 @@ export const sidebarNavigation: NavItem[] = [
       },
       {
         title: 'Mockup',
-        icon: '💻',
+        icon: createElement(ComputerDesktopIcon),
         children: [
           { title: 'Browser', path: '/components/browser-mockup' },
           { title: 'Code', path: '/components/code-mockup' },
@@ -147,56 +169,55 @@ export const sidebarNavigation: NavItem[] = [
   },
   {
     title: 'Theme Generator',
-    icon: '🎨',
+    icon: createElement(PaintBrushIcon),
     path: '/theme-generator',
   },
   {
     title: 'Store',
-    icon: '🛒',
+    icon: createElement(ShoppingCartIcon),
     path: '/store',
     tag: 'updated',
   },
   {
     title: 'Blog',
-    icon: '📝',
+    icon: createElement(DocumentTextIcon),
     path: '/blog',
   },
   {
     title: 'Resources',
-    icon: '📚',
+    icon: createElement(AcademicCapIcon),
     path: '/resources',
   },
   {
     title: 'Playground',
-    icon: '🎮',
+    icon: createElement(CommandLineIcon),
     path: '/playground',
   },
   {
     title: 'GitHub',
-    icon: '🐙',
+    icon: createElement(CodeBracketIcon),
     path: '/github',
   },
   {
     title: 'Discord',
-    icon: '💬',
+    icon: createElement(ChatBubbleLeftRightIcon),
     path: '/discord',
   },
   {
     title: 'Support daisyUI',
-    icon: '❤️',
+    icon: createElement(HeartIcon),
     path: '/support',
   },
   {
     title: 'T-shirts',
-    icon: '👕',
+    icon: createElement(UserIcon),
     path: '/tshirts',
     tag: 'new',
   },
   {
     title: 'llms.txt',
-    icon: '🤖',
+    icon: createElement(CpuChipIcon),
     path: '/llms-txt',
     tag: 'updated',
   },
 ]
-
