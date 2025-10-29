@@ -5,6 +5,11 @@
 
 import { useTheme, useDrawerState } from '@/hooks'
 import { Logo } from '@/components/ui'
+import {
+  Squares2X2Icon,
+  DocumentDuplicateIcon,
+  SwatchIcon,
+} from '@heroicons/react/24/outline'
 
 export function Header() {
   const { theme, toggleTheme } = useTheme()
@@ -34,7 +39,7 @@ export function Header() {
         {!isDrawerOpen && <Logo />}
       </div>
 
-      {/* Center Section - Search */}
+      {/* Center Section - Search
       <div className="navbar-center hidden lg:flex flex-1 max-w-md">
         <div className="form-control w-full">
           <input
@@ -43,17 +48,20 @@ export function Header() {
             className="input input-bordered input-sm w-full"
           />
         </div>
-      </div>
+      </div> */}
 
       {/* Right Section - Actions */}
       <div className="navbar-end gap-2">
-        <button className="btn btn-ghost btn-sm hidden sm:inline-flex">
+        <button className="btn btn-ghost btn-sm hidden sm:inline-flex font-normal gap-2">
+          <Squares2X2Icon className="h-4 w-4" />
           Components
         </button>
-        <button className="btn btn-ghost btn-sm hidden sm:inline-flex">
+        <button className="btn btn-ghost btn-sm hidden sm:inline-flex font-normal gap-2">
+          <DocumentDuplicateIcon className="h-4 w-4" />
           Templates
         </button>
-        <button className="btn btn-ghost btn-sm hidden sm:inline-flex">
+        <button className="btn btn-ghost btn-sm hidden sm:inline-flex font-normal gap-2">
+          <SwatchIcon className="h-4 w-4" />
           Figma
         </button>
         <button
@@ -63,7 +71,7 @@ export function Header() {
         >
           {theme === 'light' ? '🌙' : '☀️'}
         </button>
-        <div className="dropdown dropdown-end">
+        {/* <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-square btn-sm">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -74,7 +82,7 @@ export function Header() {
             <li><a href="/about">About</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </header>
   )
