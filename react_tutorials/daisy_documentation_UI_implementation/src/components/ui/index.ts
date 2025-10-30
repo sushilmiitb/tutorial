@@ -13,3 +13,12 @@ export type { CardProps } from './Card'
 
 export { Logo } from './Logo'
 
+export { Section } from './Section'
+export type { SectionProps } from './Section'
+
+export { Text } from './Text'
+export type { TextProps, TextStyle } from './Text'
+
+export { PageNav } from './PageNav'
+export type { PageNavProps, PageLinkInfo } from './PageNav'
+

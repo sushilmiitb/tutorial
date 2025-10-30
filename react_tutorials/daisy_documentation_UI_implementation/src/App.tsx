@@ -5,14 +5,14 @@
 
 import { useState } from 'react'
 import { Header, Footer, Sidebar, RightSidebar } from '@/components/layout'
-import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage } from '@/pages'
+import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage } from '@/pages'
 import './App.css'
 
-type Page = 'home' | 'about' | 'dashboard' | 'components' | '404'
+type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | '404'
 
 function App() {
   // Simple client-side routing state
-  const [currentPage, setCurrentPage] = useState<Page>('components')
+  const [currentPage, setCurrentPage] = useState<Page>('introduction')
 
   // Listen for custom navigation events
   useState(() => {
@@ -38,6 +38,7 @@ function App() {
         if (path === '/') setCurrentPage('home')
         else if (path === '/about') setCurrentPage('about')
         else if (path === '/dashboard') setCurrentPage('dashboard')
+        else if (path === '/introduction' || path === '/intro' || path === '/docs/introduction' || path.startsWith('/introduction')) setCurrentPage('introduction')
         else if (path.startsWith('/components')) setCurrentPage('components')
         else setCurrentPage('404')
         
@@ -60,10 +61,12 @@ function App() {
         return <DashboardPage />
       case 'components':
         return <ComponentPage />
+      case 'introduction':
+        return <IntroductionPage />
       case '404':
         return <NotFoundPage />
       default:
-        return <ComponentPage />
+        return <IntroductionPage />
     }
   }
 
