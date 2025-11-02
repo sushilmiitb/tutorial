@@ -5,10 +5,10 @@
 
 import { useState } from 'react'
 import { Header, Footer, Sidebar, RightSidebar } from '@/components/layout'
-import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage } from '@/pages'
+import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage, InstallPage } from '@/pages'
 import './App.css'
 
-type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | '404'
+type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | 'install' | '404'
 
 function App() {
   // Simple client-side routing state
@@ -39,6 +39,7 @@ function App() {
         else if (path === '/about') setCurrentPage('about')
         else if (path === '/dashboard') setCurrentPage('dashboard')
         else if (path === '/introduction' || path === '/intro' || path === '/docs/introduction' || path.startsWith('/introduction')) setCurrentPage('introduction')
+        else if (path === '/install' || path === '/docs/install') setCurrentPage('install')
         else if (path.startsWith('/components')) setCurrentPage('components')
         else setCurrentPage('404')
         
@@ -63,6 +64,8 @@ function App() {
         return <ComponentPage />
       case 'introduction':
         return <IntroductionPage />
+      case 'install':
+        return <InstallPage />
       case '404':
         return <NotFoundPage />
       default:

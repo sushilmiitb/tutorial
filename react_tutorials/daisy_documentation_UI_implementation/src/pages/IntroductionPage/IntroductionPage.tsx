@@ -172,8 +172,7 @@ export function IntroductionPage() {
 
       {/* Page navigation */}
       <PageNav
-        prev={{ href: '/docs/introduction', label: 'Introduction' }}
-        next={{ href: '/docs/cdn', label: 'CDN' }}
+        next={{ href: '/docs/install', label: 'Install' }}
         className="mt-10"
       />
     </div>

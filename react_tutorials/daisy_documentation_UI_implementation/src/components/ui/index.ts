@@ -22,3 +22,6 @@ export type { TextProps, TextStyle } from './Text'
 export { PageNav } from './PageNav'
 export type { PageNavProps, PageLinkInfo } from './PageNav'
 
+export { CodeTabs, CodeBlock } from './Code'
+export type { CodeTabsProps, CodeTabItem, CodeLine, CodeBlockProps } from './Code'
+
