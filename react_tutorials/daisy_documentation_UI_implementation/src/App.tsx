@@ -3,19 +3,18 @@
  * Documentation-style layout with drawer sidebar
  */
 
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { Header, Footer, Sidebar, RightSidebar } from '@/components/layout'
 import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage, InstallPage } from '@/pages'
+import { useRoute, type Page } from '@/hooks'
 import './App.css'
 
-type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | 'install' | '404'
-
 function App() {
-  // Simple client-side routing state
-  const [currentPage, setCurrentPage] = useState<Page>('introduction')
+  // Use centralized routing hook
+  const { currentPage, setCurrentPage, navigate } = useRoute()
 
   // Listen for custom navigation events
-  useState(() => {
+  useEffect(() => {
     const handleNavigation = (event: Event) => {
       const customEvent = event as CustomEvent<{ page: Page }>
       setCurrentPage(customEvent.detail.page)
@@ -23,10 +22,10 @@ function App() {
 
     window.addEventListener('navigate', handleNavigation)
     return () => window.removeEventListener('navigate', handleNavigation)
-  })
+  }, [setCurrentPage])
 
   // Intercept anchor clicks for simple routing
-  useState(() => {
+  useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const anchor = target.closest('a')
@@ -34,22 +33,13 @@ function App() {
       if (anchor && anchor.href.startsWith(window.location.origin)) {
         e.preventDefault()
         const path = anchor.pathname
-        
-        if (path === '/') setCurrentPage('home')
-        else if (path === '/about') setCurrentPage('about')
-        else if (path === '/dashboard') setCurrentPage('dashboard')
-        else if (path === '/introduction' || path === '/intro' || path === '/docs/introduction' || path.startsWith('/introduction')) setCurrentPage('introduction')
-        else if (path === '/install' || path === '/docs/install') setCurrentPage('install')
-        else if (path.startsWith('/components')) setCurrentPage('components')
-        else setCurrentPage('404')
-        
-        window.history.pushState({}, '', path)
+        navigate(path)
       }
     }
 
     document.addEventListener('click', handleClick)
     return () => document.removeEventListener('click', handleClick)
-  })
+  }, [navigate])
 
   // Render current page
   const renderPage = () => {

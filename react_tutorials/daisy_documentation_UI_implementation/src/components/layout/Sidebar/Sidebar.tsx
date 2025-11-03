@@ -7,6 +7,7 @@
 import { useState, cloneElement, isValidElement } from 'react'
 import { sidebarNavigation, type NavItem } from '@/data/navigation'
 import { Logo } from '@/components/ui'
+import { useCurrentPath } from '@/hooks'
 
 export function Sidebar() {
   // Initialize expanded sections with defaults (using title as unique identifier)
@@ -15,7 +16,8 @@ export function Sidebar() {
     .map((item) => item.title)
   
   const [expandedSections, setExpandedSections] = useState<string[]>(defaultExpanded)
-  const [activeItem, setActiveItem] = useState('/components/button')
+  // Get current path from centralized hook
+  const activeItem = useCurrentPath()
 
   /**
    * Toggles expansion state of a section
@@ -122,10 +124,6 @@ export function Sidebar() {
         {isClickable ? (
           <a
             href={item.path!}
-            onClick={(e) => {
-              e.preventDefault()
-              setActiveItem(item.path!)
-            }}
             className={`flex items-center justify-start gap-2 px-3 py-1.5 text-sm text-left rounded-sm transition-colors ${indentClass} ${
               isActive && !hasChildren
                 ? 'bg-neutral text-neutral-content font-medium'
