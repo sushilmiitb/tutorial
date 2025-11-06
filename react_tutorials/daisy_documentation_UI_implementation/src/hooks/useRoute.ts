@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react'
 
-export type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | 'install' | '404'
+export type Page = 'home' | 'about' | 'dashboard' | 'components' | 'introduction' | 'install' | 'vite-install' | '404'
 
 /**
  * Helper function to convert URL path to page identifier
@@ -16,6 +16,7 @@ function getPageFromPath(path: string): Page {
   if (path === '/about') return 'about'
   if (path === '/dashboard') return 'dashboard'
   if (path === '/introduction' || path === '/intro' || path === '/docs/introduction' || path.startsWith('/introduction')) return 'introduction'
+  if (path === '/docs/install/vite' || path === '/install/vite') return 'vite-install'
   if (path === '/install' || path === '/docs/install') return 'install'
   if (path.startsWith('/components')) return 'components'
   return '404'

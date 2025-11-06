@@ -5,7 +5,7 @@
 
 import { useEffect } from 'react'
 import { Header, Footer, Sidebar, RightSidebar } from '@/components/layout'
-import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage, InstallPage } from '@/pages'
+import { HomePage, AboutPage, DashboardPage, NotFoundPage, ComponentPage, IntroductionPage, InstallPage, ViteInstallPage } from '@/pages'
 import { useRoute, type Page } from '@/hooks'
 import './App.css'
 
@@ -56,6 +56,8 @@ function App() {
         return <IntroductionPage />
       case 'install':
         return <InstallPage />
+      case 'vite-install':
+        return <ViteInstallPage />
       case '404':
         return <NotFoundPage />
       default:

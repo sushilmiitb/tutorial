@@ -12,6 +12,7 @@ export interface CardProps {
   imageAlt?: string
   bordered?: boolean
   compact?: boolean
+  shadow?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'none' | false
   className?: string
 }
 
@@ -24,6 +25,7 @@ export interface CardProps {
  * @param imageAlt - Alt text for image
  * @param bordered - Whether card has border
  * @param compact - Whether card uses compact styling
+ * @param shadow - Shadow level ('sm', 'md', 'lg', 'xl', '2xl'), 'none' or false to disable. Defaults to 'xl'
  * @param className - Additional CSS classes
  */
 export function Card({
@@ -34,12 +36,21 @@ export function Card({
   imageAlt = 'Card image',
   bordered = false,
   compact = false,
+  shadow = 'xl',
   className = '',
 }: CardProps) {
+  const shadowClassMap: Record<string, string> = {
+    'sm': 'shadow-sm',
+    'md': 'shadow-md',
+    'lg': 'shadow-lg',
+    'xl': 'shadow-xl',
+    '2xl': 'shadow-2xl',
+  }
+  const shadowClass = shadow && shadow !== 'none' ? shadowClassMap[shadow] || 'shadow-xl' : ''
   const cardClasses = [
     'card',
     'bg-base-100',
-    'shadow-xl',
+    shadowClass,
     bordered ? 'card-bordered' : '',
     compact ? 'card-compact' : '',
     className,

@@ -79,16 +79,24 @@ export interface CodeBlockProps {
   code: string
   prefix?: string
   className?: string
+  filename?: string
 }
 
-export function CodeBlock({ code, prefix, className = '' }: CodeBlockProps) {
+export function CodeBlock({ code, prefix, className = '', filename }: CodeBlockProps) {
   const lines = code.split('\n')
   return (
-    <div className={["mockup-code relative", className].filter(Boolean).join(" ")}> 
-      <CopyButton text={code} />
-      {lines.map((line, idx) => (
-        <pre key={idx} data-prefix={idx === 0 ? prefix : undefined}><code>{line}</code></pre>
-      ))}
+    <div className={className}>
+      {filename && (
+        <div className="text-sm text-base-content/60 italic mb-1">
+          {filename}
+        </div>
+      )}
+      <div className="mockup-code relative">
+        <CopyButton text={code} />
+        {lines.map((line, idx) => (
+          <pre key={idx} data-prefix={idx === 0 ? prefix : undefined}><code>{line}</code></pre>
+        ))}
+      </div>
     </div>
   )
 }
